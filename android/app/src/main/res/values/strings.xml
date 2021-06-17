@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Photo Gallery</string>
+    <string name="title_activity_main">Photo Gallery</string>
+    <string name="package_name">com.photogallery.app</string>
+    <string name="custom_url_scheme">com.photogallery.app</string>
+</resources>

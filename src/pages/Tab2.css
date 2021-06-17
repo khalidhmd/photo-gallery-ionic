@@ -1,0 +1,11 @@
+.button {
+  padding: 0%;
+  position: absolute;
+  bottom: 3%;
+  left: 3%;
+}
+
+.button-icon {
+  margin: 0%;
+  color: red;
+}
