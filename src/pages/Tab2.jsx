@@ -84,8 +84,9 @@ const savePicture = async (cameraPhoto, fileName) => {
 const takePhoto = async () => {
   const cameraPhoto = await Camera.getPhoto({
     resultType: CameraResultType.Uri,
-    source: CameraSource.Camera,
+    source: CameraSource.Photos,
     quality: 100,
+    presentationStyle: "popover",
   });
   const fileName = new Date().getTime() + "." + cameraPhoto.format;
   const takenPhoto = await savePicture(cameraPhoto, fileName);
@@ -94,6 +95,7 @@ const takePhoto = async () => {
 
 const Tab2 = () => {
   const [photos, setPhotos] = useState([]);
+  const [photoToDelete, setPhotoToDelete] = useState();
 
   useEffect(() => {
     const loadSaved = async () => {
@@ -153,13 +155,20 @@ const Tab2 = () => {
         <IonGrid>
           <IonRow>
             {photos.map((photo, index) => (
-              <IonCol size="6" key={index}>
-                <IonImg src={photo.webviewPath} />
+              <IonCol size="6" key={photo.webviewPath}>
+                <IonImg
+                  src={photo.webviewPath}
+                  className={
+                    photoToDelete &&
+                    photoToDelete.webviewPath === photo.webviewPath &&
+                    "photo-to-delete"
+                  }
+                />
                 <IonButton
                   // fill="clear"
                   className={"button"}
                   onClick={() => {
-                    handleDeletePhoto(photo);
+                    setPhotoToDelete(photo);
                   }}
                 >
                   <IonIcon
@@ -172,6 +181,28 @@ const Tab2 = () => {
             ))}
           </IonRow>
         </IonGrid>
+        <IonActionSheet
+          isOpen={!!photoToDelete}
+          buttons={[
+            {
+              text: "Delete",
+              role: "destructive",
+              icon: trash,
+              handler: () => {
+                if (photoToDelete) {
+                  handleDeletePhoto(photoToDelete);
+                  setPhotoToDelete(undefined);
+                }
+              },
+            },
+            {
+              text: "Cancel",
+              icon: close,
+              role: "cancel",
+            },
+          ]}
+          onDidDismiss={() => setPhotoToDelete(undefined)}
+        />
         <IonFab vertical="bottom" horizontal="center" slot="fixed">
           <IonFabButton onClick={() => handleTakePhoto()}>
             <IonIcon icon={camera}></IonIcon>
