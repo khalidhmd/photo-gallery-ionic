@@ -1,4 +1,4 @@
-import { camera, trash, close } from "ionicons/icons";
+import { image, trash, close } from "ionicons/icons";
 import {
   IonContent,
   IonHeader,
@@ -205,7 +205,7 @@ const Tab2 = () => {
         />
         <IonFab vertical="bottom" horizontal="center" slot="fixed">
           <IonFabButton onClick={() => handleTakePhoto()}>
-            <IonIcon icon={camera}></IonIcon>
+            <IonIcon icon={image}></IonIcon>
           </IonFabButton>
         </IonFab>
       </IonContent>
