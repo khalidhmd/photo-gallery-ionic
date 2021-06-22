@@ -88,6 +88,7 @@ const takePhoto = async () => {
     quality: 100,
     presentationStyle: "popover",
   });
+  console.log(cameraPhoto);
   const fileName = new Date().getTime() + "." + cameraPhoto.format;
   const takenPhoto = await savePicture(cameraPhoto, fileName);
   return takenPhoto;
